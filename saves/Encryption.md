@@ -51,8 +51,8 @@ For quick reference, here are the keys for some of the games:
 | Sprinkle Islands | `0u1er0ck5` | Ouie rocks |
 | Granny Smith | `gr4nny0n5k47es` | Granny On Stakes |
 | Smash Hit | `5m45hh1t41ght` | Smash Hit Aight |
-| Beyondium | `d1r4c15Da5h1T` | DIRAC Is Da Shit<sup>2</sup> |
 | Does not Commute | `d035n0tc0mmut3inl33t` | Does not commute in leet |
+| Beyondium | `d1r4c15Da5h1T` | DIRAC Is Da Shit<sup>2</sup> |
 | PinOut | `n01t15ntp1n0ut1s` | No it isn't, PinOut is |
 
 1. The free versions of the first few games appear to share the encryption keys with their paid versions.
