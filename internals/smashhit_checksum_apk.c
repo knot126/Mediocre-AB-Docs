@@ -11,11 +11,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-typedef struct file_data {
-	uint8_t *data;
-	size_t size;
-} file_data;
-
 void print_usage(const char *binary_name) {
 	printf("Usage: %s [path to apk file]\n", binary_name);
 }
@@ -32,51 +27,6 @@ bool str_ends_with(const char * restrict string, const char * const restrict end
 	}
 	
 	return !strcmp(&string[string_size - end_size], end);
-}
-
-int file_load(file_data *out, const char * restrict path) {
-	/**
-	 * Load a file given the name of the file to load. Returns 1 on error, 0 on
-	 * success.
-	 */
-	
-	// Open the file
-	FILE *file = fopen(path, "rb");
-	
-	if (!file) {
-		return 1;
-	}
-	
-	// Get length by seeking to end, telling and then seeking back
-	fseek(file, 0, SEEK_END);
-	size_t size = ftell(file);
-	fseek(file, 0, SEEK_SET);
-	
-	// Allocate memory to hold the file data
-	uint8_t *data = malloc(sizeof *data * size);
-	
-	if (!data) {
-		return 1;
-	}
-	
-	// Read in data from the file
-	if (fread(data, 1, size, file) != size) {
-		free(data);
-		return 1;
-	}
-	
-	// Clean up
-	fclose(file);
-	
-	// Save results
-	out->data = data;
-	out->size = size;
-	
-	return 0;
-}
-
-void file_free(file_data *this) {
-	free(this->data);
 }
 
 uint16_t file_read_uint16(FILE *file) {
