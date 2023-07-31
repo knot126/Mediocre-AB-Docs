@@ -34,6 +34,24 @@ Some version of the check appears in each of these functions at least once:
 * `FUN_00146170`
 * `android_main`
 
+## Checksum
+
+The anti-tamper checksum appears to use a very basic XOR-based checksum with a key of `c+r3k7:1`.
+
+For each file that ends with `.so` and `classes.dex` in the APK file, the compressed contents are fed to a function that is equivlent to the following:
+
+```c
+void checksum_content(uint8_t * restrict checksum, const size_t size, const uint8_t * restrict data) {
+	for (size_t i = 0; i < size; i++) {
+		checksum[i % 256] += gKey[i % 8] ^ data[i];
+	}
+}
+```
+
+Where `checksum` points to the block of memory that keeps the intermediate checksum (e.g. each file adds to the current hash).
+
+See [`smashhit_checksum_apk.c`](smashhit_checksum_apk.c) for a working implementation and some clarity on how it works.
+
 ## Notes
 
 1. Smash Hit versions before 1.3.0 did not have anti-tamper protection.
